@@ -7,7 +7,7 @@ define_key(content_buffer_normal_keymap, "y", "copy");
 define_key(default_global_keymap, "C-[", "buffer-previous");
 define_key(default_global_keymap,"C-]","buffer-next" );
 define_key(content_buffer_normal_keymap, "C-x f", "follow-new-buffer");
-define_key(default_global_keymap, "C-k", "kill-current-buffer");
+define_key(default_global_keymap, "C-q", "kill-current-buffer");
 define_webjump("g", "https://www.google.com.vn/?gws_rd=cr&ei=K_QCU4GdNI3skgXGuoHgBQ#q=%s");
 define_webjump("y", "http://www.youtube.com/results?search_query=%s");
 define_key(default_global_keymap, "C-M", "download-video-2-music" );
@@ -15,16 +15,17 @@ define_key(default_global_keymap, "C-D", "download-video-2-downloads" );
 //auto save exist buffers in conkeror
 require("session.js"); 
 session_auto_save_auto_load = true; 
+//define default download directory
+cwd=get_home_directory();
+cwd.append("Downloads");
 
 // delete interactive_commands["password-manager"];
-
-//facebook mode from tran xuan truong
+//Conkeror extended facebook mode
 let (path = get_home_directory()) {
   // add to load path
   path.appendRelativePath(".conkerorrc");
   path.appendRelativePath("conkeror-extended-facebook-mode");
   load_paths.unshift(make_uri(path).spec);
-
   // include the library
   require("conkeror-extended-facebook-mode.js");  
 };
@@ -33,6 +34,8 @@ define_key(facebook_keymap, "2", "cefm-open-messages");
 define_key(facebook_keymap, "3", "cefm-open-notification");
 define_key(facebook_keymap, "4", "cefm-open-home");
 define_key(facebook_keymap, "M-q", "cefm-quick-logout");
+//Conkeror extended haivl mode
+
 /// alternative key for ESC
 require("global-overlay-keymap");
 define_key_alias("M-o", "escape");
@@ -40,31 +43,14 @@ define_key_alias("M-o", "escape");
 //History completetion
 url_completion_use_history = true;
 session_pref('browser.history_expire_days', 365);
-
-//echo message
-function echo_message (window, message) {
-    window.minibuffer.message(message);
-}
-
-interactive("echo-message",
-    "echo a user-supplied message in the minibuffer",
-    function (I) {
-        echo_message(
-            I.window,
-            (yield I.minibuffer.read($prompt = "message: ")));
-    });
-
 // mode line
 require("mode-line.js");
-
 // buffer count
 add_hook("mode_line_hook", mode_line_adder(buffer_count_widget), true);
 // loading buffer count
 add_hook("mode_line_hook", mode_line_adder(loading_count_widget), true);
-
-
 //Stop loading all buffer
-define_key(default_global_keymap, "M-R",
+define_key(default_global_keymap, "M-s",
           function (I)
           {
               for (var i = 0; i < I.window.buffers.count; i++)
@@ -98,3 +84,28 @@ interactive("download-video-2-downloads","Download current playing video.",
 			  I.minibuffer.message("Downloading video to folder Downloads");
 			  shell_command_blind("cclive -d /home/nguyenvinhlinh/Downloads \"https://www.youtube.com/watch?v=\""+ path);
 			});
+//view history 
+url_completion_use_bookmarks = true;
+url_completion_use_history = true;
+require('page-modes/google-search-results.js');
+user_pref('extensions.mozrepl.autoStart', true);
+let (path = get_home_directory()) {
+  // add to load path
+  path.appendRelativePath("mozrepl.js");
+  session_pref("extensions.mozrepl.initUrl", make_uri(path).spec);
+};
+//This path is for Haivl mode and its config
+let (path = get_home_directory()) {
+  // add to load path
+  path.appendRelativePath(".conkerorrc");
+  path.appendRelativePath("conkeror-extended-haivl-mode");
+  load_paths.unshift(make_uri(path).spec);
+  // include the library
+  require("haivl.js");
+};
+define_key(haivl_keymap, "1", "haivl-new");
+define_key(haivl_keymap, "2", "haivl-unread");
+define_key(haivl_keymap, "3", "haivl-vote");
+define_key(haivl_keymap, "4", "haivl-video");
+define_key(haivl_keymap, "5", "haivl-hot");
+define_key(haivl_keymap, "M-c", "haivl-seemore");
