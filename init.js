@@ -103,9 +103,9 @@ let (path = get_home_directory()) {
   // include the library
   require("haivl.js");
 };
-define_key(haivl_keymap, "1", "haivl-new");
-define_key(haivl_keymap, "2", "haivl-unread");
-define_key(haivl_keymap, "3", "haivl-vote");
-define_key(haivl_keymap, "4", "haivl-video");
-define_key(haivl_keymap, "5", "haivl-hot");
+define_key(haivl_keymap, "1", "haivl-1");
+define_key(haivl_keymap, "2", "haivl-2");
+define_key(haivl_keymap, "3", "haivl-3");
+define_key(haivl_keymap, "4", "haivl-4");
+define_key(haivl_keymap, "5", "haivl-5");
 define_key(haivl_keymap, "M-c", "haivl-seemore");
