@@ -1,3 +1,4 @@
+dumpln("hello, world!");
 require("favicon.js");
 require("new-tabs.js");
 tab_bar_show_icon=true;
@@ -8,8 +9,9 @@ define_key(default_global_keymap, "C-[", "buffer-previous");
 define_key(default_global_keymap,"C-]","buffer-next" );
 define_key(content_buffer_normal_keymap, "C-x f", "follow-new-buffer");
 define_key(default_global_keymap, "C-q", "kill-current-buffer");
-define_webjump("g", "https://www.google.com.vn/?gws_rd=cr&ei=K_QCU4GdNI3skgXGuoHgBQ#q=%s");
+define_webjump("gg", "https://www.google.com.vn/?gws_rd=cr&ei=K_QCU4GdNI3skgXGuoHgBQ#q=%s");
 define_webjump("y", "http://www.youtube.com/results?search_query=%s");
+define_webjump("g", "https://duckduckgo.com/?q=%s&ia=about");
 define_key(default_global_keymap, "C-M", "download-video-2-music" );
 define_key(default_global_keymap, "C-D", "download-video-2-downloads" );
 //auto save exist buffers in conkeror
@@ -109,3 +111,19 @@ define_key(haivl_keymap, "3", "haivl-3");
 define_key(haivl_keymap, "4", "haivl-4");
 define_key(haivl_keymap, "5", "haivl-5");
 define_key(haivl_keymap, "M-c", "haivl-seemore");
+
+let (path = get_home_directory()) {
+  // add to load path
+  path.appendRelativePath(".conkerorrc");
+  path.appendRelativePath("conkeror-extended-genk-mode");
+  load_paths.unshift(make_uri(path).spec);
+  require("genk.js");
+};
+
+// keyboard shortcut for often-used sites
+interactive("open-hacker-news", "Go to hacker news", "follow-new-buffer", $browser_object="https://news.ycombinator.com/");
+interactive("open-jupiter-broadcasting", "Go to jupiter broadcasting", "follow-new-buffer", $browser_object="http://www.jupiterbroadcasting.com/");
+define_key(content_buffer_normal_keymap, "f1", "open-hacker-news");
+define_key(content_buffer_normal_keymap, "f2", "open-jupiter-broadcasting");
+
+
