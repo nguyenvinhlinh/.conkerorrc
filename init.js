@@ -1,7 +1,21 @@
+function nvl_add_path(dir){
+  let (path = get_home_directory()){
+	path.appendRelativePath('.conkerorrc');
+	path.appendRelativePath(dir);
+	load_paths.unshift(make_uri(path).spec);
+  };
+};
+nvl_add_path("config");
+nvl_add_path("conkeror-extended-facebook-mode");
 
-dumpln("hello, world!");
 require("favicon.js");
 require("new-tabs.js");
+require("linh-url-shortcut.js");
+require("linh-web-jump.js");
+require("session.js");
+require("conkeror-extended-facebook-mode.js");
+require("linh-facebook-keymap.js");
+
 tab_bar_show_icon=true;
 tab_bar_show_index=true;
 
@@ -10,34 +24,15 @@ define_key(default_global_keymap, "C-[", "buffer-previous");
 define_key(default_global_keymap,"C-]","buffer-next" );
 define_key(content_buffer_normal_keymap, "C-x f", "follow-new-buffer");
 define_key(default_global_keymap, "C-q", "kill-current-buffer");
-define_webjump("gg", "https://www.google.com.vn/?gws_rd=cr&ei=K_QCU4GdNI3skgXGuoHgBQ#q=%s");
-define_webjump("tr ", "https://translate.google.com/#en/vi/%s");
-define_webjump("y", "http://www.youtube.com/results?search_query=%s");
-define_webjump("g", "https://duckduckgo.com/?q=%s&ia=about");
 define_key(default_global_keymap, "C-M", "download-video-2-music" );
 define_key(default_global_keymap, "C-D", "download-video-2-downloads" );
-//auto save exist buffers in conkeror
-require("session.js"); 
+
 session_auto_save_auto_load = true; 
 //define default download directory
 cwd=get_home_directory();
 cwd.append("Downloads");
 
 // delete interactive_commands["password-manager"];
-//Conkeror extended facebook mode
-let (path = get_home_directory()) {
-  // add to load path
-  path.appendRelativePath(".conkerorrc");
-  path.appendRelativePath("conkeror-extended-facebook-mode");
-  load_paths.unshift(make_uri(path).spec);
-  // include the library
-  require("conkeror-extended-facebook-mode.js");  
-};
-define_key(facebook_keymap, "1", "cefm-open-friend-request");
-define_key(facebook_keymap, "2", "cefm-open-messages");
-define_key(facebook_keymap, "3", "cefm-open-notification");
-define_key(facebook_keymap, "4", "cefm-open-home");
-define_key(facebook_keymap, "M-q", "cefm-quick-logout");
 //Conkeror extended haivl mode
 
 /// alternative key for ESC
@@ -121,17 +116,6 @@ let (path = get_home_directory()) {
   load_paths.unshift(make_uri(path).spec);
   require("genk.js");
 };
-
-// keyboard shortcut for often-used sites
-interactive("open-hacker-news", "Go to hacker news", "follow-new-buffer", $browser_object="https://news.ycombinator.com/");
-interactive("open-jupiter-broadcasting", "Go to jupiter broadcasting", "follow-new-buffer", $browser_object="http://www.jupiterbroadcasting.com/");
-interactive("open-nvl-blog", "Go to jupiter broadcasting", "follow-new-buffer", $browser_object="http://nguyenvinhlinh.github.io");
-
-define_key(content_buffer_normal_keymap, "f1", "open-hacker-news");
-define_key(content_buffer_normal_keymap, "f2", "open-jupiter-broadcasting");
-define_key(content_buffer_normal_keymap, "f3", "open-nvl-blog")
-define_key(content_buffer_normal_keymap, "C-p", "paste-url-new-buffer");
-
 clock_time_format = "%R %B %d, %Y"
 
 //remember lasted download dir
@@ -139,3 +123,12 @@ function update_save_path (info) {
     cwd = info.target_file.parent;
 }
 add_hook("download_added_hook", update_save_path);
+define_browser_object_class("yc-links",
+                            "yc news link",
+                            xpath_browser_object_handler("//td[@class='title']/a"),
+                            $hint = "select link");
+
+interactive("follow-yc-links",
+            "follow the news link on yc",
+            "follow",
+            $browser_object = browser_object_yc_links);
