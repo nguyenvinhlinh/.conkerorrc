@@ -7,7 +7,7 @@ function nvl_add_path(dir){
 };
 nvl_add_path("config");
 nvl_add_path("conkeror-extended-facebook-mode");
-
+nvl_add_path("conkeror-extended-haivl-mode");
 require("favicon.js");
 require("new-tabs.js");
 require("linh-url-shortcut.js");
@@ -15,6 +15,8 @@ require("linh-web-jump.js");
 require("session.js");
 require("conkeror-extended-facebook-mode.js");
 require("linh-facebook-keymap.js");
+require("conkeror-extended-haivl-mode.js");
+require("linh-haivl-keymap.js");
 
 tab_bar_show_icon=true;
 tab_bar_show_index=true;
@@ -102,12 +104,6 @@ let (path = get_home_directory()) {
   // include the library
   require("haivl.js");
 };
-define_key(haivl_keymap, "1", "haivl-1");
-define_key(haivl_keymap, "2", "haivl-2");
-define_key(haivl_keymap, "3", "haivl-3");
-define_key(haivl_keymap, "4", "haivl-4");
-define_key(haivl_keymap, "5", "haivl-5");
-define_key(haivl_keymap, "M-c", "haivl-seemore");
 
 let (path = get_home_directory()) {
   // add to load path
