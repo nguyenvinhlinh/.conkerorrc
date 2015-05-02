@@ -17,7 +17,7 @@ require("conkeror-extended-facebook-mode.js");
 require("linh-facebook-keymap.js");
 require("conkeror-extended-haivl-mode.js");
 require("linh-haivl-keymap.js");
-
+require("linh-history-delete.js");
 tab_bar_show_icon=true;
 tab_bar_show_index=true;
 
@@ -33,10 +33,6 @@ session_auto_save_auto_load = true;
 //define default download directory
 cwd=get_home_directory();
 cwd.append("Downloads");
-
-// delete interactive_commands["password-manager"];
-//Conkeror extended haivl mode
-
 /// alternative key for ESC
 require("global-overlay-keymap");
 define_key_alias("M-o", "escape");
@@ -94,16 +90,7 @@ let (path = get_home_directory()) {
   // add to load path
   path.appendRelativePath("mozrepl.js");
   session_pref("extensions.mozrepl.initUrl", make_uri(path).spec);
-};
-//This path is for Haivl mode and its config
-let (path = get_home_directory()) {
-  // add to load path
-  path.appendRelativePath(".conkerorrc");
-  path.appendRelativePath("conkeror-extended-haivl-mode");
-  load_paths.unshift(make_uri(path).spec);
-  // include the library
-  require("haivl.js");
-};
+}; 
 
 let (path = get_home_directory()) {
   // add to load path
