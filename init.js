@@ -116,4 +116,3 @@ interactive("follow-yc-links",
             "follow the news link on yc",
             "follow",
             $browser_object = browser_object_yc_links);
-//tets
