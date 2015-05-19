@@ -1,3 +1,4 @@
+/*global tets */
 function nvl_add_path(dir){
   let (path = get_home_directory()){
 	path.appendRelativePath('.conkerorrc');
@@ -115,3 +116,4 @@ interactive("follow-yc-links",
             "follow the news link on yc",
             "follow",
             $browser_object = browser_object_yc_links);
+//tets
