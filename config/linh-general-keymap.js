@@ -21,3 +21,5 @@ define_key(default_global_keymap, "M-r",
                   reload(I.window.buffers.get_buffer(i));
               }
           });
+require("global-overlay-keymap");
+define_key_alias("M-o", "escape");
