@@ -2,7 +2,3 @@
 	path = conkeror-extended-facebook-mode
 	url = https://github.com/tmtxt/conkeror-extended-facebook-mode.git
 	branch = master
-[submodule "conkeror-extended-haivl-mode"]
-	path = conkeror-extended-haivl-mode
-	url = https://github.com/nguyenvinhlinh/conkeror-extended-haivl-mode.git
-	branch = master
