@@ -1,6 +1,3 @@
-/*global tets */
-dumpln("#################################################################################################\n"
-       + "#############################################################################");
 function nvl_add_path(dir){
   let (path = get_home_directory()){
 	path.appendRelativePath('.conkerorrc');
@@ -52,28 +49,17 @@ define_key(default_global_keymap, "M-r",
               }
           });
 //view history 
-dumpln("#################################################################################################\n"
-       + "############################################################################# LOAEDED1");
-
 url_completion_use_bookmarks = true;
 url_completion_use_history = true;
 require('page-modes/google-search-results.js');
 clock_time_format = "%R %B %d, %Y"
-dumpln("#################################################################################################\n"
-       + "############################################################################# LOAEDED2");
 require("favicon.js");
 require("new-tabs.js");
 require("linh-url-shortcut.js");
-dumpln("#################################################################################################\n"
-       + "############################################################################# LOAEDED3");
 require("linh-web-jump.js");
 require("session.js");
-dumpln("#################################################################################################\n"
-       + "############################################################################# LOAEDED4");
 require("conkeror-extended-facebook-mode.js");
 require("linh-facebook-keymap.js");
-dumpln("#################################################################################################\n"
-       + "############################################################################# LOAEDED5");
 require("conkeror-extended-haivl-mode.js");
 require("linh-haivl-keymap.js");
 require("linh-history-delete.js");
@@ -84,5 +70,3 @@ url_completion_use_history = true;
 session_pref('browser.history_expire_days', 365);
 tab_bar_show_icon=true;
 tab_bar_show_index=true;
-dumpln("#################################################################################################\n"
-       + "############################################################################# LOAEDED ALL");
