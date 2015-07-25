@@ -1,6 +1,4 @@
 /*global tets */
-dumpln("#################################################################################################\n"
-       + "#############################################################################");
 function nvl_add_path(dir){
   let (path = get_home_directory()){
 	path.appendRelativePath('.conkerorrc');
@@ -20,13 +18,17 @@ define_key(default_global_keymap,"C-]","buffer-next" );
 define_key(content_buffer_normal_keymap, "C-x f", "follow-new-buffer");
 define_key(default_global_keymap, "C-q", "kill-current-buffer");
 
-
+session_auto_save_auto_load = true; 
 //define default download directory
 cwd=get_home_directory();
 cwd.append("Downloads");
 /// alternative key for ESC
 require("global-overlay-keymap");
 define_key_alias("M-o", "escape");
+
+//History completetion
+url_completion_use_history = true;
+session_pref('browser.history_expire_days', 365);
 // mode line
 require("mode-line.js");
 // buffer count
@@ -52,37 +54,51 @@ define_key(default_global_keymap, "M-r",
               }
           });
 //view history 
-dumpln("#################################################################################################\n"
-       + "############################################################################# LOAEDED1");
-
 url_completion_use_bookmarks = true;
 url_completion_use_history = true;
 require('page-modes/google-search-results.js');
+user_pref('extensions.mozrepl.autoStart', true);
+let (path = get_home_directory()) {
+  // add to load path
+  path.appendRelativePath("mozrepl.js");
+  session_pref("extensions.mozrepl.initUrl", make_uri(path).spec);
+}; 
+
+let (path = get_home_directory()) {
+  // add to load path
+  path.appendRelativePath(".conkerorrc");
+  path.appendRelativePath("conkeror-extended-genk-mode");
+  load_paths.unshift(make_uri(path).spec);
+  require("genk.js");
+};
 clock_time_format = "%R %B %d, %Y"
-dumpln("#################################################################################################\n"
-       + "############################################################################# LOAEDED2");
+
+//remember lasted download dir
+function update_save_path (info) {
+    cwd = info.target_file.parent;
+}
+add_hook("download_added_hook", update_save_path);
+define_browser_object_class("yc-links",
+                            "yc news link",
+                            xpath_browser_object_handler("//td[@class='title']/a"),
+                            $hint = "select link");
+
+interactive("follow-yc-links",
+            "follow the news link on yc",
+            "follow",
+            $browser_object = browser_object_yc_links);
+clicks_in_new_buffer_target = OPEN_NEW_BUFFER_BACKGROUND;
+clicks_in_new_buffer_button = 1;
+
 require("favicon.js");
 require("new-tabs.js");
 require("linh-url-shortcut.js");
-dumpln("#################################################################################################\n"
-       + "############################################################################# LOAEDED3");
 require("linh-web-jump.js");
 require("session.js");
-dumpln("#################################################################################################\n"
-       + "############################################################################# LOAEDED4");
 require("conkeror-extended-facebook-mode.js");
 require("linh-facebook-keymap.js");
-dumpln("#################################################################################################\n"
-       + "############################################################################# LOAEDED5");
 require("conkeror-extended-haivl-mode.js");
 require("linh-haivl-keymap.js");
 require("linh-history-delete.js");
 require("linh-youtube.js");
 require("clicks-in-new-buffer.js");
-session_auto_save_auto_load = true; 
-url_completion_use_history = true;
-session_pref('browser.history_expire_days', 365);
-tab_bar_show_icon=true;
-tab_bar_show_index=true;
-dumpln("#################################################################################################\n"
-       + "############################################################################# LOAEDED ALL");
