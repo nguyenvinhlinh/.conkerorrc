@@ -8,5 +8,5 @@ define_key(content_buffer_normal_keymap, "f1", "open-hacker-news");
 define_key(content_buffer_normal_keymap, "f2", "open-jupiter-broadcasting");
 define_key(content_buffer_normal_keymap, "f3", "open-github")
 define_key(content_buffer_normal_keymap, "f4", "open-nvl-blog")
-define_key(content_buffer_normal_keymap, "f5", "open-aria2c")
+define_key(content_buffer_normal_keymap, "f12", "open-aria2c")
 define_key(content_buffer_normal_keymap, "C-p", "paste-url-new-buffer");
