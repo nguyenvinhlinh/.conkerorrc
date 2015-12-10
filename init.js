@@ -23,19 +23,21 @@ require("new-tabs.js");
 require("linh-url-shortcut.js");
 require("linh-web-jump.js");
 require("session.js");
-require("conkeror-extended-facebook-mode.js");
-require("linh-facebook-keymap.js");
-require("conkeror-extended-haivl-mode.js");
-require("linh-haivl-keymap.js");
 require("linh-history-delete.js");
 require("linh-youtube.js");
 require("clicks-in-new-buffer.js");
 require("linh-general-keymap.js");
 require('page-modes/google-search-results.js');
+
 url_completion_use_bookmarks = true;
 url_completion_use_history = true;
-session_auto_save_auto_load = true; 
+session_auto_save_auto_load = false; 
 url_completion_use_history = true;
 session_pref('browser.history_expire_days', 365);
 tab_bar_show_icon=true;
 tab_bar_show_index=true;
+
+require("conkeror-extended-facebook-mode.js");
+require("linh-facebook-keymap.js");
+require("conkeror-extended-haivl-mode.js");
+require("linh-haivl-keymap.js");

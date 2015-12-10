@@ -3,6 +3,8 @@ define_key(default_global_keymap, "C-[", "buffer-previous");
 define_key(default_global_keymap,"C-]","buffer-next" );
 define_key(content_buffer_normal_keymap, "C-x f", "follow-new-buffer");
 define_key(default_global_keymap, "C-q", "kill-current-buffer");
+define_key(content_buffer_normal_keymap, "k", "backward-line");
+define_key(content_buffer_normal_keymap, "j", "forward-line");
 //Stop loading all buffer
 define_key(default_global_keymap, "M-s",
           function (I)
