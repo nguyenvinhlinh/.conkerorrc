@@ -4,5 +4,5 @@
 	branch = master
 [submodule "conkeror-extended-haivl-mode"]
 	path = conkeror-extended-haivl-mode
-	url = git@github.com:nguyenvinhlinh/conkeror-extended-haivl-mode.git
+	url = https://github.com/nguyenvinhlinh/conkeror-extended-haivl-mode.git
 	branch = master
